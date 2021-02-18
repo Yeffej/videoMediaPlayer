@@ -19,35 +19,25 @@
         <source src="https://ia800201.us.archive.org/12/items/BigBuckBunny_328/BigBuckBunny_512kb.mp4" />
       </video>
 
-      <button>Play/Pause</button>
+      <button id="PlayPause">Play/Pause</button>
+      <button id="muteBT">Mute/Unmute</button>
     </main>
+    <section class="comments">
+      <h2>Comments</h2>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae tempore iure quaerat sed, deleniti quo temporibus et repellat? Culpa minima, eum repellendus quas neque natus adipisci inventore laudantium commodi numquam.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae tempore iure quaerat sed, deleniti quo temporibus et repellat? Culpa minima, eum repellendus quas neque natus adipisci inventore laudantium commodi numquam.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae tempore iure quaerat sed, deleniti quo temporibus et repellat? Culpa minima, eum repellendus quas neque natus adipisci inventore laudantium commodi numquam.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae tempore iure quaerat sed, deleniti quo temporibus et repellat? Culpa minima, eum repellendus quas neque natus adipisci inventore laudantium commodi numquam.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae tempore iure quaerat sed, deleniti quo temporibus et repellat? Culpa minima, eum repellendus quas neque natus adipisci inventore laudantium commodi numquam.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae tempore iure quaerat sed, deleniti quo temporibus et repellat? Culpa minima, eum repellendus quas neque natus adipisci inventore laudantium commodi numquam.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae tempore iure quaerat sed, deleniti quo temporibus et repellat? Culpa minima, eum repellendus quas neque natus adipisci inventore laudantium commodi numquam.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae tempore iure quaerat sed, deleniti quo temporibus et repellat? Culpa minima, eum repellendus quas neque natus adipisci inventore laudantium commodi numquam.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae tempore iure quaerat sed, deleniti quo temporibus et repellat? Culpa minima, eum repellendus quas neque natus adipisci inventore laudantium commodi numquam.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae tempore iure quaerat sed, deleniti quo temporibus et repellat? Culpa minima, eum repellendus quas neque natus adipisci inventore laudantium commodi numquam.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae tempore iure quaerat sed, deleniti quo temporibus et repellat? Culpa minima, eum repellendus quas neque natus adipisci inventore laudantium commodi numquam.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae tempore iure quaerat sed, deleniti quo temporibus et repellat? Culpa minima, eum repellendus quas neque natus adipisci inventore laudantium commodi numquam.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae tempore iure quaerat sed, deleniti quo temporibus et repellat? Culpa minima, eum repellendus quas neque natus adipisci inventore laudantium commodi numquam.</p>
+    </section>
+    <script type="module" src="Assets/index.js"></script>
   </body>
-  <script>
-    const video = document.querySelector("video")
-    const bt = document.querySelector("button")
-
-    function MediaPlayer(config) {
-      this.media = config.el
-    }
-
-    MediaPlayer.prototype.play = function() {
-      this.media.play()
-    }
-    MediaPlayer.prototype.pause = function() {
-      this.media.pause()
-    }
-    MediaPlayer.prototype.btActions = function() {
-      if (this.media.paused) {
-        this.play()
-      }else {
-        this.pause()
-      }
-    }
-    
-    const player = new MediaPlayer( {el: video} )
-
-    bt.onclick = () =>  player.btActions()
-
-  </script>
-
 </html>
