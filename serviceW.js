@@ -8,8 +8,7 @@ self.addEventListener("install", event => {
 
 self.addEventListener("fetch", event => {
     const request = event.request
-
-    if (request.method !== "GET") {
+    if (request.method !== "GET" || request.destination === "video") {
         return;
     }
     
@@ -22,11 +21,7 @@ async function preCache() {
     const cache = await caches.open(VERSION)
     return cache.addAll([
         "/",
-        "index.html",
-        "Assets/index.js",
-        "Assets/index.css",
-        "Assets/plugins/autoPause.js",
-        "Assets/plugins/autoPlay.js",
+        
     ])
 }
 
