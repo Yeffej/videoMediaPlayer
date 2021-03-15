@@ -2,14 +2,21 @@ class MediaPlayer {
   media: HTMLMediaElement;
   private plugins: any;
   app: HTMLElement;
-  
+  btPP: HTMLElement;
+  btMute: HTMLElement;
+
+
   constructor(config, plugins) {
-    this.media = config.el
-    this.app = config.app
+    this.initializer(config)
     this.plugins = plugins
     this.initializePlugins()
   }
-
+  initializer(config) {
+    this.media = config.el
+    this.app = config.app
+    this.btPP = config.btPP
+    this.btMute = config.btMute
+  }
   initializePlugins() {
     this.plugins.forEach(plugin => {
       plugin.run(this)
@@ -26,8 +33,10 @@ class MediaPlayer {
 
   TogglePlay() {
     if (this.media.paused) {
+      this.btPP.style.backgroundPositionX = "-9.5vw"
       this.play()
     }else {
+      this.btPP.style.backgroundPositionX = "0vw"
       this.pause()
     }
   }

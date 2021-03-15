@@ -1,12 +1,13 @@
 class AutoPlay {
     run(player) {
         const media = player.media
-        this.play(media)
+        this.play(player)
 
     }
-    private play(media) {
-        media.muted = true
-        media.play()
+    private play(player) {
+        player.media.muted = true
+        player.media.play()
+        player.btPP.style.backgroundPositionX = "-9.5vw"
     }
 
 }

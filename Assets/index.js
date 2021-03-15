@@ -6,7 +6,12 @@ const video = document.querySelector("video");
 const btPP = document.querySelector("#PlayPause");
 const btMute = document.querySelector("#muteBT");
 const app = document.querySelector("#app");
-const player = new MediaPlayer({ el: video, app: app }, [new AutoPlay(), new AutoPause(), RenderAds.getInstance()]);
+const player = new MediaPlayer({
+    el: video,
+    app: app,
+    btMute: btMute,
+    btPP: btPP
+}, [new AutoPlay(), new AutoPause(), RenderAds.getInstance()]);
 btPP.onclick = () => player.TogglePlay();
 btMute.onclick = () => player.ToggleMute();
 if (navigator.serviceWorker) {
