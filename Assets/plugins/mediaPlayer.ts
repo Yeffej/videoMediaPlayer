@@ -2,22 +2,24 @@ class MediaPlayer {
   media: HTMLMediaElement;
   private plugins: any;
   app: HTMLElement;
-  btPP: HTMLElement;
+  btPP: HTMLElement[];
   btMute: HTMLElement;
-
+  ctrsBar: HTMLElement;
 
   constructor(config, plugins) {
     this.initializer(config)
     this.plugins = plugins
     this.initializePlugins()
+    this.ControlsVisibility()
   }
-  initializer(config) {
+  private initializer(config) {
     this.media = config.el
     this.app = config.app
     this.btPP = config.btPP
     this.btMute = config.btMute
+    this.ctrsBar = config.ctrsBar
   }
-  initializePlugins() {
+  private initializePlugins() {
     this.plugins.forEach(plugin => {
       plugin.run(this)
     });
@@ -33,10 +35,29 @@ class MediaPlayer {
 
   TogglePlay() {
     if (this.media.paused) {
-      this.btPP.style.backgroundPositionX = "-9.5vw"
+      let counter = 0
+      this.btPP.forEach((el)=> {
+        if(counter === 1) {
+          el.style.backgroundPositionX = "-12vw"
+        }else {
+          el.style.backgroundPositionX = "-9.5vw"
+        }
+
+        counter++;
+      })
+      
       this.play()
     }else {
-      this.btPP.style.backgroundPositionX = "0vw"
+      let counter = 0
+      this.btPP.forEach((el)=> {
+        if(counter === 1) {
+          el.style.backgroundPositionX = "3.5vw"
+        }else {
+          el.style.backgroundPositionX = "0vw"
+        }
+
+        counter++;
+      })
       this.pause()
     }
   }
@@ -47,6 +68,19 @@ class MediaPlayer {
     }else {
         this.media.muted = true
     }
+  }
+
+  private ControlsVisibility() {
+    // this.app.onmouseover = () => {
+    //   this.ctrsBar.style.animation = "GrowIn 1s forwards"
+    //   this.btPP[1].style.animation = "fadeIn 1s forwards"
+
+    // }
+    // this.app.onmouseout = () => {
+    //   this.ctrsBar.style.animation = "GrowOut 1s forwards"
+    //   this.btPP[1].style.animation = "fadeOut 1s forwards"
+    // }
+    
   }
 }
 

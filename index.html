@@ -16,12 +16,20 @@
 
     <main>
       <div class="container" id="app">
-        <button class="btPP-main" ></button>
+        <button class="btPP-main" id="playPauseM"></button>
         <video class="movie">
           <source src="https://ia800201.us.archive.org/12/items/BigBuckBunny_328/BigBuckBunny_512kb.mp4" />
         </video>
         <div class="controls" id="controlsWrapper">
           <button class="play" id="PlayPause"></button>
+          <div class="timeBar" id="timeBar">
+            <span id="currentTime"></span>
+            <div id="TBAR" class="timeBar_bar">
+              <div class="timeBar_bar-circle"></div>
+            </div>
+            <div class="timeBar_backgroundBar"></div>
+            <span id="totalTime"></span>
+          </div>
           <button class="mute" id="muteBT"></button>
           <button class="option" id="optionBT"></button>
         </div>
@@ -66,6 +74,6 @@
           commodi numquam.</p>
       </div>
     </section>
-    <script type="module" src="Assets/index.js"></script>
+    <script type="module" src="app/Assets/index.js"></script>
   </body>
 </html>

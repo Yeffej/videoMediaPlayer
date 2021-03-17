@@ -53,24 +53,27 @@ main {
   height: 10vw;
   border-radius: 50%;
   background-size: 30vw;
-  background-position-x: -12vw; /* -12vw / 0vw */
+  opacity: 0;
+  /* background-position-x: -12vw; -12vw / 0vw */
+  z-index: 1;
   left: calc(50% - 10vw);
   bottom: calc(50% - 5vw);
   background-image: url("https://i.ibb.co/HdXzZDz/Buttons-Media-Player.png");
 }
 .controls {
+  display: flex;
   position: absolute;
   background: #fdfdfdb7;
   bottom: 0;
   width: 100%;
-  height: 10%;
+  height: 0%;
   overflow: hidden;
 }
 .play {
   height: 100%;
   width: 10%;
   background-size: 18vw;
-  background-position-x: -9.5vw; /* -9.5vw / 0vw */
+  /* background-position-x: -9.5vw; -9.5vw / 0vw */
   left: 0;
   bottom: 0;
   background-image: url("https://i.ibb.co/HdXzZDz/Buttons-Media-Player.png");
@@ -93,6 +96,31 @@ main {
   background-size: contain;
   background-position-x: center;
 }
+
+/* Time Bar */
+.timebar {
+  align-self: center;
+  margin: 0 auto;
+  width: 50%;
+}
+.timeBar_backgroundBar {
+  height: 30%;
+  background-color: #350224;
+  border-radius: 5vw;
+}
+.timeBar_bar {
+  background-color: #f100a1;
+  height: 30%;
+  border-radius: 5vw;
+}
+.timeBar_bar-circle {
+  background-color: inherit;
+  border-radius: 50%;
+  width: 7vw;
+  height: 7vw;
+}
+
+/* Comments */
 
 .ContComments {
   background: #dd70bc;
@@ -126,4 +154,39 @@ main {
 
 .ads {
 
+}
+
+@keyframes GrowIn {
+  from {
+    height: 0%;
+  }
+  to {
+    height: 12%;
+  }
+}
+@keyframes GrowOut {
+  from {
+    height: 12%;
+
+  }
+  to {
+    height: 0%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }

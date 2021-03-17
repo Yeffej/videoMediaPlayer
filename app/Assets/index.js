@@ -3,16 +3,26 @@ import AutoPause from "./plugins/autoPause.js";
 import MediaPlayer from "./plugins/mediaPlayer.js";
 import RenderAds from "./plugins/adsController.js";
 const video = document.querySelector("video");
-const btPP = document.querySelector("#PlayPause");
+const btPP = GetPlayPauseBT();
 const btMute = document.querySelector("#muteBT");
 const app = document.querySelector("#app");
+const controlsBar = document.querySelector("#controlsWrapper");
+function GetPlayPauseBT() {
+    const BT_1 = document.querySelector("#PlayPause");
+    const BT_2 = document.querySelector("#playPauseM");
+    const buttonsPP = [BT_1, BT_2];
+    return buttonsPP;
+}
 const player = new MediaPlayer({
     el: video,
     app: app,
     btMute: btMute,
-    btPP: btPP
+    btPP: btPP,
+    ctrsBar: controlsBar
 }, [new AutoPlay(), new AutoPause(), RenderAds.getInstance()]);
-btPP.onclick = () => player.TogglePlay();
+btPP.forEach((el) => {
+    el.onclick = () => player.TogglePlay();
+});
 btMute.onclick = () => player.ToggleMute();
 if (navigator.serviceWorker) {
     navigator.serviceWorker.register("../serviceW.js")
