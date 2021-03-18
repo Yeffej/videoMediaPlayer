@@ -103,21 +103,35 @@ main {
   margin: 0 auto;
   width: 50%;
 }
-.timeBar_backgroundBar {
-  height: 30%;
-  background-color: #350224;
+.bar {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
   border-radius: 5vw;
+
+}
+.timeBar_BarContainer {
+  position: relative;
+  width: 80%;
+  height: 30%;
+}
+.timeBar_backgroundBar {
+  background-color: #350224;
 }
 .timeBar_bar {
-  background-color: #f100a1;
-  height: 30%;
-  border-radius: 5vw;
+  background-color: #f100a1; 
+  z-index: 1; 
 }
-.timeBar_bar-circle {
-  background-color: inherit;
+.timeBar_bar::after {
+  content: "";
+  position: absolute;
+  background-color: #ac0072;
   border-radius: 50%;
-  width: 7vw;
-  height: 7vw;
+  width: 20px;
+  height: 20px;
+  top: calc(50% - 10px);
+  right:  -10px;
 }
 
 /* Comments */

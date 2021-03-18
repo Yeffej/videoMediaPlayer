@@ -8,6 +8,8 @@ const btPP: HTMLElement[] = GetPlayPauseBT()
 const btMute: HTMLElement = document.querySelector("#muteBT")
 const app: HTMLElement = document.querySelector("#app")
 const controlsBar: HTMLElement = document.querySelector("#controlsWrapper")
+const TBarWrapper: HTMLElement = document.getElementById("TimeBarWrapper")
+const TimeBar: HTMLElement = document.getElementById("TBAR")
 
 function GetPlayPauseBT() {
   const BT_1: HTMLElement =  document.querySelector("#PlayPause")
@@ -22,7 +24,9 @@ const player = new MediaPlayer( {
   app: app, 
   btMute: btMute,
   btPP: btPP,
-  ctrsBar: controlsBar
+  ctrsBar: controlsBar,
+  Tbar: TimeBar,
+  TbarWrapper: TBarWrapper,
 },
    [new AutoPlay(), new AutoPause(), RenderAds.getInstance()] )
 
