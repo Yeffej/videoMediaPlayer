@@ -10,6 +10,7 @@ const app: HTMLElement = document.querySelector("#app")
 const controlsBar: HTMLElement = document.querySelector("#controlsWrapper")
 const TBarWrapper: HTMLElement = document.getElementById("TimeBarWrapper")
 const TimeBar: HTMLElement = document.getElementById("TBAR")
+const Displays: HTMLElement[] = GetTimeDisplays();
 
 function GetPlayPauseBT() {
   const BT_1: HTMLElement =  document.querySelector("#PlayPause")
@@ -17,6 +18,12 @@ function GetPlayPauseBT() {
   const buttonsPP = [BT_1, BT_2]
 
   return buttonsPP;
+}
+function GetTimeDisplays() {
+  const currentTime = document.getElementById("currentTime")
+  const Duration = document.getElementById("totalTime")
+
+  return [currentTime, Duration];
 }
 
 const player = new MediaPlayer( {
@@ -27,6 +34,7 @@ const player = new MediaPlayer( {
   ctrsBar: controlsBar,
   Tbar: TimeBar,
   TbarWrapper: TBarWrapper,
+  displays: Displays
 },
    [new AutoPlay(), new AutoPause(), RenderAds.getInstance()] )
 
@@ -34,6 +42,9 @@ btPP.forEach((el) => {
   el.onclick = ()=> player.TogglePlay();
 })
 btMute.onclick = () =>  player.ToggleMute()
+
+
+
 
 if (navigator.serviceWorker) {
     navigator.serviceWorker.register("../serviceW.js")

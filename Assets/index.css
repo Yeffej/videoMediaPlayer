@@ -66,7 +66,7 @@ main {
   background: #fdfdfdb7;
   bottom: 0;
   width: 100%;
-  height: 0%;
+  height: 10%;
   overflow: hidden;
 }
 .play {
@@ -100,8 +100,24 @@ main {
 /* Time Bar */
 .timebar {
   align-self: center;
+  text-align: center;
   margin: 0 auto;
-  width: 50%;
+  width: 60%;
+  color: black;
+}
+.fontTime {
+  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .8em;
+  font-weight: 900;
+}
+.timeBar_currentTime {
+  text-align: start;
+  margin-right: 10px;
+}
+.timeBar_totalTime {
+  text-align: end;
+  margin-left: 10px;
 }
 .bar {
   position: absolute;
@@ -112,8 +128,9 @@ main {
 
 }
 .timeBar_BarContainer {
+  display: inline-block;
   position: relative;
-  width: 80%;
+  width: 70%;
   height: 30%;
 }
 .timeBar_backgroundBar {
@@ -130,8 +147,9 @@ main {
   border-radius: 50%;
   width: 20px;
   height: 20px;
-  top: calc(50% - 10px);
-  right:  -10px;
+  top: 50%;
+  right:  0;
+  transform: translate(50%,-50%);
 }
 
 /* Comments */
@@ -166,9 +184,61 @@ main {
 
 /* EXTRAS */
 
-.ads {
+.ADSwrapper {
+  display: grid;
+  grid-template-columns: 20% 70%;
+  grid-template-rows: 40% 40% 20%;
+  grid-template-areas: "img title"
+                        "p p"
+                        "link link";
+  position: absolute;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  border-radius: 10px;
+  height: 30%;
+  width: 70%;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  z-index: 2;
 
 }
+.ADSwrapper img {
+  width: 40%;
+  grid-area: img;
+}
+.ADSwrapper h3 {
+  font-size: 1.5em;
+  margin: 0;
+  grid-area: title;
+}
+.ADSwrapper p {
+  margin: 0;
+  font-size: 1em;
+  grid-area: p;
+  text-align: center;
+}
+.ADSwrapper a {
+  text-decoration: none;
+  color: inherit;
+  grid-area: link;
+  font-size: .9em;
+}
+.ADSwrapper a:hover {
+  text-decoration: underline;
+  font-weight: 900;
+}
+.ADSwrapper .deleteBT {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 5px;
+  font-weight: 900;
+  font-size: 1.15em;
+}
+
 
 @keyframes GrowIn {
   from {
@@ -203,4 +273,84 @@ main {
   to {
     opacity: 0;
   }
+}
+
+
+/*  MATCH MEDIA  */
+@media screen and (max-width: 720px) {
+  .ADSwrapper p {
+    font-size: .65em;
+  }
+  .ADSwrapper h3 {
+    font-size: 1.1em;
+  }
+  .ADSwrapper a {
+    font-size: .7em;
+  }
+  .ADSwrapper .deleteBT {
+    font-size: .8em;
+  }
+
+  /* TimeBar */
+  .fontTime {
+    font-size: .55em;
+  }
+  .timeBar_bar::after {
+    width: 16px;
+    height: 16px;
+  }
+}
+@media screen and (max-width: 540px) {
+  .ADSwrapper p {
+    font-size: .5em;
+  }
+  .ADSwrapper h3 {
+    font-size: .9em;
+  }
+  .ADSwrapper a {
+    font-size: .5em;
+  }
+  .ADSwrapper .deleteBT {
+    font-size: .7em;
+  }
+
+  /* TimeBar */
+  .timeBar_bar::after {
+    width: 12px;
+    height: 12px;
+  }
+  .fontTime {
+    font-size: .45em;
+  }
+  .timeBar_currentTime {
+    margin-right: 0;
+  }
+  .timeBar_totalTime {
+    margin-left: 0;
+  }
+  
+}
+@media screen and (max-width: 380px) {
+  .ADSwrapper p {
+    font-size: .4em;
+  }
+  .ADSwrapper h3 {
+    font-size: .7em;
+  }
+  .ADSwrapper a {
+    font-size: .4em;
+  }
+  .ADSwrapper .deleteBT {
+    font-size: .55em;
+  }
+
+  
+  .timeBar_bar::after {
+    width: 8px;
+    height: 8px;
+  }
+  .fontTime {
+    font-size: .35em;
+  }
+  
 }

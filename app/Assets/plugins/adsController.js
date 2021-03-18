@@ -47,7 +47,10 @@ class Renderads {
         const adlink = document.createElement("a");
         adlink.textContent = "Ir Al Curso";
         adlink.href = ad.url;
-        adContainer.append(adtitle, adtext, adImg, adlink);
+        const deleteX = document.createElement("span");
+        deleteX.textContent = "X";
+        deleteX.className = "deleteBT";
+        adContainer.append(adtitle, adtext, adImg, adlink, deleteX);
         return adContainer;
     }
     renderAds(app, player) {
@@ -57,13 +60,21 @@ class Renderads {
             if (counter > 0)
                 return;
             const time = Math.floor(media.currentTime);
+            let ADremoved = false;
             if (time > 1 && time % 40 === 0) {
-                console.log("ok");
                 const ad = this.adMaker();
                 app.appendChild(ad);
-                console.log(ad);
                 counter++;
+                const deleteBT = ad.querySelector(".deleteBT");
+                deleteBT.addEventListener("click", removeAD);
+                function removeAD() {
+                    ad.remove();
+                    ADremoved = true;
+                    deleteBT.removeEventListener("click", removeAD);
+                }
                 setTimeout(() => {
+                    if (ADremoved)
+                        return;
                     ad.remove();
                     counter = 0;
                 }, 10000);

@@ -9,11 +9,17 @@ const app = document.querySelector("#app");
 const controlsBar = document.querySelector("#controlsWrapper");
 const TBarWrapper = document.getElementById("TimeBarWrapper");
 const TimeBar = document.getElementById("TBAR");
+const Displays = GetTimeDisplays();
 function GetPlayPauseBT() {
     const BT_1 = document.querySelector("#PlayPause");
     const BT_2 = document.querySelector("#playPauseM");
     const buttonsPP = [BT_1, BT_2];
     return buttonsPP;
+}
+function GetTimeDisplays() {
+    const currentTime = document.getElementById("currentTime");
+    const Duration = document.getElementById("totalTime");
+    return [currentTime, Duration];
 }
 const player = new MediaPlayer({
     el: video,
@@ -23,6 +29,7 @@ const player = new MediaPlayer({
     ctrsBar: controlsBar,
     Tbar: TimeBar,
     TbarWrapper: TBarWrapper,
+    displays: Displays
 }, [new AutoPlay(), new AutoPause(), RenderAds.getInstance()]);
 btPP.forEach((el) => {
     el.onclick = () => player.TogglePlay();

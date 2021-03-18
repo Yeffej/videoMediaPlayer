@@ -7,6 +7,8 @@ class MediaPlayer {
   ctrsBar: HTMLElement;
   TbarWrapper: HTMLElement;
   Tbar: HTMLElement;
+  displayDuration: HTMLElement;
+  displayCurrentTime: HTMLElement;
 
   constructor(config, plugins) {
     this.initializer(config)
@@ -23,6 +25,8 @@ class MediaPlayer {
     this.ctrsBar = config.ctrsBar
     this.Tbar = config.Tbar
     this.TbarWrapper = config.TbarWrapper
+    this.displayDuration = config.displays[1]
+    this.displayCurrentTime = config.displays[0]
   }
   private initializePlugins() {
     this.plugins.forEach(plugin => {
@@ -71,31 +75,63 @@ class MediaPlayer {
     }
   }
   private ControlsVisibility() {
-    this.app.onmouseover = () => {
-      this.ctrsBar.style.animation = "GrowIn 1s forwards"
-      this.btPP[1].style.animation = "fadeIn 1s forwards"
+    // this.app.onmouseover = () => {
+    //   this.ctrsBar.style.animation = "GrowIn 1s forwards"
+    //   this.btPP[1].style.animation = "fadeIn 1s forwards"
 
-    }
-    this.app.onmouseout = () => {
-      this.ctrsBar.style.animation = "GrowOut 1s forwards"
-      this.btPP[1].style.animation = "fadeOut 1s forwards"
-    }
+    // }
+    // this.app.onmouseout = () => {
+    //   this.ctrsBar.style.animation = "GrowOut 1s forwards"
+    //   this.btPP[1].style.animation = "fadeOut 1s forwards"
+    // }
     
   }
   private ControlMediaTime() {
     const Width: number = this.TbarWrapper.clientWidth
     const distanceTilLeft: number = this.TbarWrapper.getBoundingClientRect().left
     const TotalTime: number = this.media.duration
+    let isCLicked:boolean = false
     const SetVideoTime = () => {
         const porcentTime = parseFloat(this.Tbar.style.width)
         this.media.currentTime = (porcentTime / 100) * TotalTime
+    } 
+    function FormatTime(time:number) {
+        const hours = Math.floor( time / 3600 )
+        const minutes = Math.floor( (time % 3600)/60 )
+        const seconds = Math.floor(time % 60)
+      
+        const formatHours = hours > 9? hours: `0${hours}`
+        const formatMinutes = minutes > 9? minutes: `0${minutes}`
+        const formatSeconds = seconds > 9? seconds: `0${seconds}`
+
+        if (hours > 0) {
+          return `${formatHours}: ${formatMinutes}: ${formatSeconds}`
+        }
+
+        return `${formatMinutes} : ${formatSeconds}`
     }
 
-    let isCLicked:boolean = false
+    this.media.addEventListener("canplay", () =>  {
+      console.log("okay")
+      // this.displayDuration.textContent = FormatTime(TotalTime)
+    })
+    this.media.addEventListener("loadstart", () =>  {
+      console.log("Woa")
+    })
+    this.media.addEventListener("seeked", () =>  {
+      console.log("ok")
+    })
+    this.media.addEventListener("loadeddata", () =>  {
+      console.log("Nice")//*
+      this.displayDuration.textContent = FormatTime(TotalTime)
+    })
+    this.displayDuration.textContent = FormatTime(TotalTime)
 
     this.TbarWrapper.addEventListener("click", (e)=> {
       this.Tbar.style.width = GetPorcentWidth(Width, distanceTilLeft, e.clientX)
       SetVideoTime()
+      this.displayCurrentTime.textContent = FormatTime(this.media.currentTime)
+
     })
 
     this.TbarWrapper.onmousedown = () => isCLicked = true;
@@ -104,6 +140,8 @@ class MediaPlayer {
         if(!isCLicked) return;
         this.Tbar.style.width = GetPorcentWidth(Width, distanceTilLeft, e.clientX)
         SetVideoTime()
+        this.displayCurrentTime.textContent = FormatTime(this.media.currentTime)
+
     };
 
     function GetPorcentWidth (Width: number,  leftMargin: number, positionX: number)
@@ -119,12 +157,16 @@ class MediaPlayer {
     }
 
     this.media.addEventListener("timeupdate", (e) => {
-      const Time =   Math.floor(this.media.currentTime)
+      // const Time =   Math.floor(this.media.currentTime)
+      const Time = this.media.currentTime
       const Wporcent = (Time / TotalTime) * 100
       const barWidth = `${Wporcent}%`
 
       this.Tbar.style.width = barWidth
+      this.displayCurrentTime.textContent = FormatTime(this.media.currentTime)
     })
+
+    
 
   }
 
