@@ -41,7 +41,6 @@ main {
 }
 .container button {
   outline: none;
-  position: absolute;
   border: none;
   padding: 0;
   background-repeat: no-repeat;
@@ -49,6 +48,7 @@ main {
   background-color: transparent;
 }
 .btPP-main {
+  position: absolute;
   width: 20vw;
   height: 10vw;
   border-radius: 50%;
@@ -67,9 +67,9 @@ main {
   bottom: 0;
   width: 100%;
   height: 10%;
-  overflow: hidden;
 }
 .play {
+  position: absolute;
   height: 100%;
   width: 10%;
   background-size: 18vw;
@@ -80,14 +80,15 @@ main {
 }
 .mute {
   height: 100%;
-  width: 10%;
-  left: 10%;
-  bottom: 0;
+  width: 100%;
+  /* left: 10%;
+  bottom: 0; */
   background-image: url("https://i.ibb.co/g4tzZwY/btSonido.png");
   background-size: contain;
   background-position-x: center;
 }
 .option {
+  position: absolute;
   height: 100%;
   width: 15%;
   right: 2%;
@@ -131,6 +132,10 @@ main {
   display: inline-block;
   position: relative;
   width: 70%;
+  height: 15%;
+  transition: 600ms;
+}
+.timeBar_BarContainer:hover {
   height: 30%;
 }
 .timeBar_backgroundBar {
@@ -150,6 +155,62 @@ main {
   top: 50%;
   right:  0;
   transform: translate(50%,-50%);
+}
+.LoadedBar {
+  background-color: #ffffffc9;
+}
+
+/* VolumeBar */
+.Volume {
+  display: flex;
+  align-items: flex-end;
+  position: absolute;
+  height: 100%;
+  width: 10%;
+  left: 10%;
+  bottom: 0;
+  transition: 1s;
+}
+.volumeContainer {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  width: 20%;
+  height: 0%;
+  
+}
+.Volume:hover {
+  height: 400%;
+}
+.Volume:hover .volumeContainer {
+  height: 75%;
+}
+.Volume:hover .mute {
+  height: 25%;
+}
+.Volume:hover .volumeBar::after {
+  width: 2.6vw;
+}
+
+.volumeBar {
+  background-color: #000000;
+  border-radius: 3vw 3vw 0 0;
+  z-index: 1;
+}
+.volumeBar::after  {
+  content: "";
+  position: absolute;
+  background-color: #141111;
+  border-radius: 50%;
+  width: 0;
+  height: 2.6vw;
+  bottom: 0;
+  right:  50%;
+  transform: translate(50%, 50%);
+}
+.volumeBackgroundBar {
+  background-color: #ffffff;
 }
 
 /* Comments */
@@ -191,6 +252,7 @@ main {
   grid-template-areas: "img title"
                         "p p"
                         "link link";
+  grid-gap: 5%;
   position: absolute;
   justify-items: center;
   justify-content: center;

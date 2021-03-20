@@ -16,6 +16,8 @@ class MediaPlayer {
         this.TbarWrapper = config.TbarWrapper;
         this.displayDuration = config.displays[1];
         this.displayCurrentTime = config.displays[0];
+        this.loadedBar = config.loadedBar;
+        this.volBarContainer = config.volBarContainer;
     }
     initializePlugins() {
         this.plugins.forEach(plugin => {
@@ -95,28 +97,23 @@ class MediaPlayer {
             }
             return `${formatMinutes} : ${formatSeconds}`;
         }
-        this.media.addEventListener("canplay", () => {
-            console.log("okay");
-            // this.displayDuration.textContent = FormatTime(TotalTime)
-        });
-        this.media.addEventListener("loadstart", () => {
-            console.log("Woa");
-        });
-        this.media.addEventListener("seeked", () => {
-            console.log("ok");
+        this.media.addEventListener("progress", () => {
+            const bufferLength = this.media.buffered.length;
+            const WidthEnd = this.media.buffered.end(bufferLength - 1);
+            const PorcentTime = ((WidthEnd) / TotalTime) * 100;
+            this.loadedBar.style.width = `${PorcentTime}%`;
         });
         this.media.addEventListener("loadeddata", () => {
-            console.log("Nice"); //*
             this.displayDuration.textContent = FormatTime(TotalTime);
         });
-        this.displayDuration.textContent = FormatTime(TotalTime);
+        // this.displayDuration.textContent = FormatTime(TotalTime)
         this.TbarWrapper.addEventListener("click", (e) => {
             this.Tbar.style.width = GetPorcentWidth(Width, distanceTilLeft, e.clientX);
             SetVideoTime();
             this.displayCurrentTime.textContent = FormatTime(this.media.currentTime);
         });
         this.TbarWrapper.onmousedown = () => isCLicked = true;
-        this.TbarWrapper.onmouseup = () => isCLicked = false;
+        document.body.onmouseup = () => isCLicked = false;
         document.body.onmousemove = (e) => {
             if (!isCLicked)
                 return;
@@ -142,6 +139,7 @@ class MediaPlayer {
             this.Tbar.style.width = barWidth;
             this.displayCurrentTime.textContent = FormatTime(this.media.currentTime);
         });
+        this.media.load();
     }
 }
 export default MediaPlayer;

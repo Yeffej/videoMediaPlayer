@@ -2,6 +2,7 @@ import AutoPlay from "./plugins/autoPlay.js";
 import AutoPause from "./plugins/autoPause.js";
 import MediaPlayer from "./plugins/mediaPlayer.js"
 import RenderAds from "./plugins/adsController.js"
+import Volume from "./plugins/volumeController.js"
 
 const video: HTMLMediaElement = document.querySelector("video")
 const btPP: HTMLElement[] = GetPlayPauseBT()
@@ -9,8 +10,10 @@ const btMute: HTMLElement = document.querySelector("#muteBT")
 const app: HTMLElement = document.querySelector("#app")
 const controlsBar: HTMLElement = document.querySelector("#controlsWrapper")
 const TBarWrapper: HTMLElement = document.getElementById("TimeBarWrapper")
+const loadBar: HTMLElement = document.querySelector("#loadedBar")
 const TimeBar: HTMLElement = document.getElementById("TBAR")
 const Displays: HTMLElement[] = GetTimeDisplays();
+const volContainer: HTMLElement = document.getElementById("volWrapper")
 
 function GetPlayPauseBT() {
   const BT_1: HTMLElement =  document.querySelector("#PlayPause")
@@ -34,9 +37,11 @@ const player = new MediaPlayer( {
   ctrsBar: controlsBar,
   Tbar: TimeBar,
   TbarWrapper: TBarWrapper,
-  displays: Displays
+  loadedBar: loadBar,
+  displays: Displays,
+  volBarContainer: volContainer,
 },
-   [new AutoPlay(), new AutoPause(), RenderAds.getInstance()] )
+   [new AutoPlay(), new AutoPause(), RenderAds.getInstance(), new Volume()])
 
 btPP.forEach((el) => {
   el.onclick = ()=> player.TogglePlay();

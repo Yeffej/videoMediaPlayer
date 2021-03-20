@@ -2,14 +2,17 @@ import AutoPlay from "./plugins/autoPlay.js";
 import AutoPause from "./plugins/autoPause.js";
 import MediaPlayer from "./plugins/mediaPlayer.js";
 import RenderAds from "./plugins/adsController.js";
+import Volume from "./plugins/volumeController.js";
 const video = document.querySelector("video");
 const btPP = GetPlayPauseBT();
 const btMute = document.querySelector("#muteBT");
 const app = document.querySelector("#app");
 const controlsBar = document.querySelector("#controlsWrapper");
 const TBarWrapper = document.getElementById("TimeBarWrapper");
+const loadBar = document.querySelector("#loadedBar");
 const TimeBar = document.getElementById("TBAR");
 const Displays = GetTimeDisplays();
+const volContainer = document.getElementById("volWrapper");
 function GetPlayPauseBT() {
     const BT_1 = document.querySelector("#PlayPause");
     const BT_2 = document.querySelector("#playPauseM");
@@ -29,8 +32,10 @@ const player = new MediaPlayer({
     ctrsBar: controlsBar,
     Tbar: TimeBar,
     TbarWrapper: TBarWrapper,
-    displays: Displays
-}, [new AutoPlay(), new AutoPause(), RenderAds.getInstance()]);
+    loadedBar: loadBar,
+    displays: Displays,
+    volBarContainer: volContainer,
+}, [new AutoPlay(), new AutoPause(), RenderAds.getInstance(), new Volume()]);
 btPP.forEach((el) => {
     el.onclick = () => player.TogglePlay();
 });
