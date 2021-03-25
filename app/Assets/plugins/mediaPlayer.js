@@ -2,9 +2,9 @@ class MediaPlayer {
     constructor(config, plugins) {
         this.initializer(config);
         this.plugins = plugins;
-        this.initializePlugins();
         this.ControlsVisibility();
         this.ControlMediaTime();
+        this.initializePlugins();
     }
     initializer(config) {
         this.media = config.el;
@@ -77,9 +77,10 @@ class MediaPlayer {
         // }
     }
     ControlMediaTime() {
+        this.media.load();
         const Width = this.TbarWrapper.clientWidth;
         const distanceTilLeft = this.TbarWrapper.getBoundingClientRect().left;
-        const TotalTime = this.media.duration;
+        let TotalTime;
         let isCLicked = false;
         const SetVideoTime = () => {
             const porcentTime = parseFloat(this.Tbar.style.width);
@@ -99,11 +100,14 @@ class MediaPlayer {
         }
         this.media.addEventListener("progress", () => {
             const bufferLength = this.media.buffered.length;
+            if (bufferLength <= 0)
+                return;
             const WidthEnd = this.media.buffered.end(bufferLength - 1);
             const PorcentTime = ((WidthEnd) / TotalTime) * 100;
             this.loadedBar.style.width = `${PorcentTime}%`;
         });
         this.media.addEventListener("loadeddata", () => {
+            TotalTime = this.media.duration;
             this.displayDuration.textContent = FormatTime(TotalTime);
         });
         // this.displayDuration.textContent = FormatTime(TotalTime)
@@ -139,7 +143,6 @@ class MediaPlayer {
             this.Tbar.style.width = barWidth;
             this.displayCurrentTime.textContent = FormatTime(this.media.currentTime);
         });
-        this.media.load();
     }
 }
 export default MediaPlayer;

@@ -3,6 +3,7 @@ import AutoPause from "./plugins/autoPause.js";
 import MediaPlayer from "./plugins/mediaPlayer.js"
 import RenderAds from "./plugins/adsController.js"
 import Volume from "./plugins/volumeController.js"
+import KeyAndFSManager from "./plugins/keyManager.js"
 
 const video: HTMLMediaElement = document.querySelector("video")
 const btPP: HTMLElement[] = GetPlayPauseBT()
@@ -41,7 +42,13 @@ const player = new MediaPlayer( {
   displays: Displays,
   volBarContainer: volContainer,
 },
-   [new AutoPlay(), new AutoPause(), RenderAds.getInstance(), new Volume()])
+   [
+      new AutoPlay(),
+      new AutoPause(), 
+      RenderAds.getInstance(), 
+      new Volume(), 
+      new KeyAndFSManager(),
+  ])
 
 btPP.forEach((el) => {
   el.onclick = ()=> player.TogglePlay();

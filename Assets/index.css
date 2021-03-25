@@ -91,12 +91,25 @@ main {
   position: absolute;
   height: 100%;
   width: 15%;
-  right: 2%;
+  right: 0;
   bottom: 0;
+  transform: translateX(-50%);
   background-image: url("https://i.ibb.co/tDBd764/optionBT.png");
   background-size: contain;
   background-position-x: center;
 }
+.FSbutton {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 8%;
+  margin-right: 5px;
+  text-align: center;
+}
+.FSbutton img {
+  height: 100%;
+}
+
 
 /* Time Bar */
 .timebar {
