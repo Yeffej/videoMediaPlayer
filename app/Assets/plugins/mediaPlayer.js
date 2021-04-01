@@ -67,14 +67,20 @@ class MediaPlayer {
         }
     }
     ControlsVisibility() {
-        // this.app.onmouseover = () => {
-        //   this.ctrsBar.style.animation = "GrowIn 1s forwards"
-        //   this.btPP[1].style.animation = "fadeIn 1s forwards"
-        // }
-        // this.app.onmouseout = () => {
-        //   this.ctrsBar.style.animation = "GrowOut 1s forwards"
-        //   this.btPP[1].style.animation = "fadeOut 1s forwards"
-        // }
+        this.app.onmouseover = () => {
+            this.ctrsBar.style.animation = "GrowIn 1s forwards";
+            this.btPP[1].style.animation = "fadeIn 1s forwards";
+            this.Tbar.style.overflow = "initial";
+            this.TbarWrapper.parentElement.style.overflow = "initial";
+            this.TbarWrapper.parentElement.style.height = "auto";
+        };
+        this.app.onmouseout = () => {
+            this.ctrsBar.style.animation = "GrowOut 1s forwards";
+            this.btPP[1].style.animation = "fadeOut 1s forwards";
+            this.Tbar.style.overflow = "hidden";
+            this.TbarWrapper.parentElement.style.overflow = "hidden";
+            this.TbarWrapper.parentElement.style.height = "inherit";
+        };
     }
     ControlMediaTime() {
         this.media.load();

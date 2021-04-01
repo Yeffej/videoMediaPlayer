@@ -156,6 +156,7 @@ main {
 }
 .timeBar_bar {
   background-color: #f100a1; 
+  overflow: hidden;
   z-index: 1; 
 }
 .timeBar_bar::after {
